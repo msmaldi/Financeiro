@@ -26,7 +26,8 @@ namespace Msmaldi.Financeiro.Website
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets<Startup>();
-            }            
+            }
+            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
