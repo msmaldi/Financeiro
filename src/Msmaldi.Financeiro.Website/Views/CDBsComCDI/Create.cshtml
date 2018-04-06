@@ -1,0 +1,71 @@
+@model CDBComCDIViewModel
+@{ ViewData["Title"] = "Create"; }
+
+<div class="row">
+    <h2>Incluir</h2>    
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-horizontal">
+                <h4>CDB com CDI</h4>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DataDaAplicacao" class="col-sm-6 control-label"></label>
+                    <div class="col-sm-6">
+                        <input autofocus type="text" asp-for="DataDaAplicacao" class="form-control"
+                               data-rule-date="true" data-msg-date="Use o formato dd/mm/aaaa." />
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <span asp-validation-for="DataDaAplicacao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataDoVencimento" class="col-sm-6 control-label"></label>
+                    <div class="col-sm-6">
+                        <input type="text" asp-for="DataDoVencimento" class="form-control"
+                               data-rule-date="true" data-msg-date="Use o formato dd/mm/aaaa." />
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <span asp-validation-for="DataDoVencimento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PrecoUnitario" class="col-sm-6 control-label"></label>
+                    <div class="col-sm-6">
+                        <input asp-for="PrecoUnitario" class="form-control" />
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <span asp-validation-for="PrecoUnitario" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantidade" class="col-sm-6 control-label"></label>
+                    <div class="col-sm-6">
+                        <input asp-for="Quantidade" class="form-control" />
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <span asp-validation-for="Quantidade" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Taxa" class="col-sm-6 control-label"></label>
+                    <div class="col-sm-6">
+                        <input asp-for="Taxa" class="form-control" />
+                    </div>                    
+                    <div class="col-sm-offset-2">
+                        <span asp-validation-for="Taxa" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-6">
+                        <input type="submit" value="Incluir" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div>
+            <a asp-action="Index">Voltar a lista.</a>
+        </div>
+    </div>
+</div>
+@section Scripts { @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }

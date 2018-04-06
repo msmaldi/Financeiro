@@ -1,0 +1,43 @@
+@model CDBComCDIResgateViewModel
+@{ ViewData["Title"] = "Resgate CDBs com CDI"; }
+<h2>@ViewData["Title"]</h2>
+<div class="row">
+    <h2>Incluir</h2>    
+    <div class="col-md-4">
+        <form asp-action="RegistrarResgate" novalidate>
+            <div class="form-horizontal">
+                <h4>CDB com CDI</h4>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Data" class="col-sm-6 control-label"></label>
+                    <div class="col-sm-6">
+                        <input autofocus type="text" asp-for="Data" class="form-control" 
+                               data-rule-date="true" data-msg-date="Use o formato dd/mm/aaaa."  />
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <span asp-validation-for="Data" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantidade" class="col-sm-6 control-label"></label>
+                    <div class="col-sm-6">
+                        <input asp-for="Quantidade" class="form-control" />
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <span asp-validation-for="Quantidade" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-6">
+                        <input type="submit" value="Incluir" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div>
+            <a asp-action="Index">Voltar a lista.</a>
+        </div>
+    </div>
+</div>
+@section Scripts { @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }
