@@ -36,7 +36,7 @@ namespace Msmaldi.Financeiro.Website
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FinanceiroDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, GuIdentityRole>()
                 .AddEntityFrameworkStores<FinanceiroDbContext>()
