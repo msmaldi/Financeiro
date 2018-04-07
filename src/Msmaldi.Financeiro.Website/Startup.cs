@@ -29,8 +29,10 @@ namespace Msmaldi.Financeiro.Website
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            Environment = env;
         }
 
+        public IHostingEnvironment Environment { get; } 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.

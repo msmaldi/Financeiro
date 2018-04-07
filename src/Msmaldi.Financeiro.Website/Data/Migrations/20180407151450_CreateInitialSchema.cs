@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace Msmaldi.Financeiro.Website.Data.Migrations
 {
-    public partial class CreateGuIdentityInitialSchema : Migration
+    public partial class CreateInitialSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,11 +49,35 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Feriados",
+                columns: table => new
+                {
+                    Data = table.Column<DateTime>(type: "date", nullable: false),
+                    Nome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feriados", x => x.Data);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TaxasDIOver",
+                columns: table => new
+                {
+                    Data = table.Column<DateTime>(type: "date", nullable: false),
+                    Taxa = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaxasDIOver", x => x.Data);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
                     RoleId = table.Column<Guid>(nullable: false)
@@ -73,7 +98,7 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
                     UserId = table.Column<Guid>(nullable: false)
@@ -153,6 +178,49 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CDBsComCDI",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataDaAplicacao = table.Column<DateTime>(type: "date", nullable: false),
+                    DataDoVencimento = table.Column<DateTime>(type: "date", nullable: false),
+                    PrecoUnitario = table.Column<double>(nullable: false),
+                    Quantidade = table.Column<int>(nullable: false),
+                    Taxa = table.Column<double>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CDBsComCDI", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CDBsComCDI_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ResgateCDBComCDI",
+                columns: table => new
+                {
+                    CDBComCDIId = table.Column<int>(nullable: false),
+                    Data = table.Column<DateTime>(type: "date", nullable: false),
+                    Quantidade = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ResgateCDBComCDI", x => new { x.CDBComCDIId, x.Data });
+                    table.ForeignKey(
+                        name: "FK_ResgateCDBComCDI_CDBsComCDI_CDBComCDIId",
+                        column: x => x.CDBComCDIId,
+                        principalTable: "CDBsComCDI",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -162,7 +230,8 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -188,7 +257,13 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CDBsComCDI_UserId",
+                table: "CDBsComCDI",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,7 +284,19 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Feriados");
+
+            migrationBuilder.DropTable(
+                name: "ResgateCDBComCDI");
+
+            migrationBuilder.DropTable(
+                name: "TaxasDIOver");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "CDBsComCDI");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

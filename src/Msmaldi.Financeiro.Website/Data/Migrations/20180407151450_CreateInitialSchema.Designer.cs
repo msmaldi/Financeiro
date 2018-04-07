@@ -11,14 +11,15 @@ using System;
 namespace Msmaldi.Financeiro.Website.Data.Migrations
 {
     [DbContext(typeof(FinanceiroDbContext))]
-    [Migration("20180324191826_CreateTableCDBsComCDI")]
-    partial class CreateTableCDBsComCDI
+    [Migration("20180407151450_CreateInitialSchema")]
+    partial class CreateInitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
@@ -119,7 +120,8 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -148,6 +150,30 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CDBsComCDI");
+                });
+
+            modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.DIOver", b =>
+                {
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("date");
+
+                    b.Property<double>("Taxa");
+
+                    b.HasKey("Data");
+
+                    b.ToTable("TaxasDIOver");
+                });
+
+            modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.Feriado", b =>
+                {
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("Data");
+
+                    b.ToTable("Feriados");
                 });
 
             modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.ResgateCDBComCDI", b =>
@@ -209,7 +235,8 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
