@@ -19,6 +19,7 @@ using Msmaldi.Financeiro.Website.Data.Seeders;
 using Msmaldi.Financeiro.Website.HostedServices;
 using Microsoft.Extensions.Hosting;
 using Msmaldi.Financeiro.Data.Seeder;
+using Msmaldi.Financeiro.Website.BusinessLogic.CDB;
 
 namespace Msmaldi.Financeiro.Website
 {
@@ -36,13 +37,7 @@ namespace Msmaldi.Financeiro.Website
             Environment = env;
         }
 
-        public Startup(IHostingEnvironment environment, IConfiguration configuration) 
-        {
-            this.Environment = environment;
-                this.Configuration = configuration;
-               
-        }
-                public IHostingEnvironment Environment { get; } 
+        public IHostingEnvironment Environment { get; } 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -75,6 +70,13 @@ namespace Msmaldi.Financeiro.Website
 
             services.AddSingleton<IHostedService, FeriadosUpdaterService>();
             services.AddSingleton<IHostedService, DIOverUpdaterService>();
+
+            services.AddScoped((service) =>
+            {                
+                var scope = service.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<FinanceiroDbContext>();
+                return new PosicaoConsolidadaCDBComCDIFactory(db.TaxasDIOver.AsNoTracking());
+            });
 
             services.AddMvc();
         }

@@ -1,13 +1,11 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using Msmaldi.Financeiro.Website.Interfaces;
 
 namespace Msmaldi.Financeiro.Website.Entities
 {
-    public class ResgateCDBComCDI
+    public class ResgateCDBComCDI : IResgateCDI
     {
         public int CDBComCDIId { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Data { get; set; }
         public int Quantidade { get; set; }
     }

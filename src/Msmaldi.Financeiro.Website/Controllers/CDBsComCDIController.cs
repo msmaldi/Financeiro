@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Msmaldi.Financeiro.Website.BusinessLogic.CDB;
 using Msmaldi.Financeiro.Website.Data;
 using Msmaldi.Financeiro.Website.Entities;
 using Msmaldi.Financeiro.Website.Models.CDBComCDIViewModels;
@@ -17,19 +18,23 @@ namespace Msmaldi.Financeiro.Website.Controllers
     {        
         private readonly FinanceiroDbContext _db;
         private readonly UserManager<User> _userManager;
+        private readonly PosicaoConsolidadaCDBComCDIFactory _factory;
 
         public CDBsComCDIController(FinanceiroDbContext context,
-                                      UserManager<User> userManager)
+                                      UserManager<User> userManager,
+                     PosicaoConsolidadaCDBComCDIFactory factory)
         {
             _db = context;
             _userManager = userManager;
+            _factory = factory;
         }
 
         // GET: CDBsComCDI/Create
         public async Task<IActionResult> Index()
         {
             var cdbs = await GetAllCDBsComCDIAsync();
-            return View(cdbs);
+            var posCDBs = cdbs.Select(c => _factory.ObterPosicaoConsolidada(c));
+            return View(posCDBs);
         }
 
         // GET: CDBsComCDI/Create

@@ -1,40 +1,42 @@
-﻿@model IEnumerable<Msmaldi.Financeiro.Website.Entities.CDBComCDI>
+﻿@model IEnumerable<Msmaldi.Financeiro.Website.BusinessLogic.CDB.PosicaoConsolidadaCDBComCDI<Msmaldi.Financeiro.Website.Entities.CDBComCDI>>
 @{ ViewData["Title"] = "CDBs com CDI"; }
 <h2>@ViewData["Title"]</h2>
+<p><a asp-action="Create">Incluir novo</a></p>
+<hr />
 <div class="row">
-    <hr />
-    <p><a asp-action="Create">Incluir novo</a></p>
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    CDB com CDI @item.Taxa.ToString("0.00%")
-                </div>
-                <div class="panel-body">
-                    <dl class="dl-horizontal">
-                        <dt>Data da Aplica&ccedil;&atilde;o:</dt>
-                        <dd>@item.DataDaAplicacao.ToString("dd/MM/yyyy")</dd>
-                        <dt>Data do Vencimento:</dt>
-                        <dd>@item.DataDoVencimento.ToString("dd/MM/yyyy")</dd>
-                        <dt>Pre&ccedil;o Unit&aacute;rio:</dt>
-                        <dd>@item.PrecoUnitario.ToString("#.00")</dd>
-                        <dt>Quantidade:</dt>
-                        <dd>@item.Quantidade</dd>
-                    </dl>
-                    <div>
-                        @foreach (var resgate in @item.Resgates)
-                        {
-                            <p>@resgate.Data - @resgate.Quantidade</p>
-                        }
-                    </div>
-                    <div class="text-center">
-                        <a class="btn btn-default" asp-action="RegistrarResgate" asp-route-id="@item.Id">Registrar Resgate</a>
-                        <a class="btn btn-default" asp-action="Detalhar" asp-route-id="@item.Id">Detalhar</a>
-                        <a class="btn btn-default" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
-                    </div>
+@foreach (var item in Model)
+{
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                CDB com CDI @item.CDBComCDI.Taxa.ToString("0.00%")
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Data da Aplica&ccedil;&atilde;o:</dt>
+                    <dd>@item.CDBComCDI.DataDaAplicacao.ToString("dd/MM/yyyy")</dd>
+                    <dt>Pre&ccedil;o Unit&aacute;rio:</dt>
+                    <dd>@item.CDBComCDI.PrecoUnitario.ToString("#.00")</dd>
+                    <dt>Quantidade:</dt>
+                    <dd>@item.CDBComCDI.Quantidade</dd>
+                    <dt>Valor Aplicado:</dt>
+                    <dd>@item.ValorAplicado.ToString("#.00")</dd>
+                    <dt>Valor Bruto:</dt>
+                    <dd>@item.ValorBruto.ToString("0.00")</dd>
+                    <dt>Valor IOF:</dt>
+                    <dd>@item.ValorIOF.ToString("0.00")</dd>
+                    <dt>Valor IR:</dt>
+                    <dd>@item.ValorIR.ToString("0.00")</dd>
+                    <dt>Valor Liquido:</dt>
+                    <dd>@item.ValorLiquido.ToString("0.00")</dd>
+                </dl>
+                <div class="text-center">
+                    @*<a class="btn btn-default" asp-action="RegistrarResgate" asp-route-id="@item.CDBComCDI.Id">Registrar Resgate</a>
+                    <a class="btn btn-default" asp-action="Detalhar" asp-route-id="@item.CDBComCDI.Id">Detalhar</a>*@
+                    <a class="btn btn-default" asp-action="Delete" asp-route-id="@item.CDBComCDI.Id">Excluir</a>
                 </div>
             </div>
         </div>
-    }
+    </div>
+}
 </div>

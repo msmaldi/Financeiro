@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Msmaldi.Financeiro.Website.Interfaces;
 
 namespace Msmaldi.Financeiro.Website.Entities
 {
-    public class CDBComCDI
+    public class CDBComCDI : ICDBComCDI
     {
         public int Id { get; protected set; }
 
@@ -14,11 +15,14 @@ namespace Msmaldi.Financeiro.Website.Entities
         public int Quantidade { get; protected set; }
         public double Taxa { get; protected set; }
         
-        public HashSet<ResgateCDBComCDI> Resgates => _resgates;
+        public IEnumerable<ResgateCDBComCDI> Resgates => _resgates;
         public int QuantidadeAtual => Quantidade - Resgates.Sum(c => c.Quantidade);
 
         public Guid UserId { get; set; }
         public User User { get; set; }
+
+
+        IEnumerable<IResgateCDI> ICDI.Resgates => Resgates;
 
         public CDBComCDI(DateTime dataDaAplicacao,
                          DateTime dataDoVencimento,
