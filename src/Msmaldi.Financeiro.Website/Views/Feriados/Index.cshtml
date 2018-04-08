@@ -1,0 +1,6 @@
+@model IEnumerable<Msmaldi.Financeiro.Website.Entities.Feriado>
+
+@foreach(var feriado in Model)
+{
+    <p>@feriado.Data - @feriado.Nome</p>
+}

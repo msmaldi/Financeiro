@@ -15,6 +15,10 @@ using Msmaldi.AspNetCore.GuIdentity;
 using Msmaldi.Financeiro.Website.Identity;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Msmaldi.Financeiro.Website.Data.Seeders;
+using Msmaldi.Financeiro.Website.HostedServices;
+using Microsoft.Extensions.Hosting;
+using Msmaldi.Financeiro.Data.Seeder;
 
 namespace Msmaldi.Financeiro.Website
 {
@@ -32,7 +36,13 @@ namespace Msmaldi.Financeiro.Website
             Environment = env;
         }
 
-        public IHostingEnvironment Environment { get; } 
+        public Startup(IHostingEnvironment environment, IConfiguration configuration) 
+        {
+            this.Environment = environment;
+                this.Configuration = configuration;
+               
+        }
+                public IHostingEnvironment Environment { get; } 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -44,10 +54,27 @@ namespace Msmaldi.Financeiro.Website
             services.AddIdentity<User, GuIdentityRole>()
                 .AddEntityFrameworkStores<FinanceiroDbContext>()
                 .AddDefaultTokenProviders()
-                .AddErrorDescriber<PortugueseIdentityErrorDescriber>();;
+                .AddErrorDescriber<PortugueseIdentityErrorDescriber>();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddSingleton<FeriadoSeeder>((service) =>
+            {
+                var scope = service.CreateScope();
+                var context = scope.ServiceProvider.GetRequiredService<FinanceiroDbContext>();
+                return new FeriadoSeeder(context);
+            });
+            
+            services.AddSingleton<TaxasDIOverSeeder>((service) =>
+            {
+                var scope = service.CreateScope();
+                var context = scope.ServiceProvider.GetRequiredService<FinanceiroDbContext>();
+                return new TaxasDIOverSeeder(context);
+            });
+
+            services.AddSingleton<IHostedService, FeriadosUpdaterService>();
+            services.AddSingleton<IHostedService, DIOverUpdaterService>();
 
             services.AddMvc();
         }
@@ -86,6 +113,8 @@ namespace Msmaldi.Financeiro.Website
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            
         }
     }
 }
