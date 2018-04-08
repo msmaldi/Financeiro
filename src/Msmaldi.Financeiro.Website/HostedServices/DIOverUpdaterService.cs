@@ -21,8 +21,10 @@ namespace Msmaldi.Financeiro.Website.HostedServices
                 {
                     await _seeder.AtualizarAsync(stoppingToken);
                 }
-                catch {}
-                await Task.Delay(15*60*1000, stoppingToken);
+                catch 
+                {                    
+                }
+                await Task.Delay(1*60*1000, stoppingToken);
             }
         }
     }
