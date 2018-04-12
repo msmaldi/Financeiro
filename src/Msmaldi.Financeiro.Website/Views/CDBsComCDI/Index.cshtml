@@ -16,19 +16,19 @@
                     <dt>Data da Aplica&ccedil;&atilde;o:</dt>
                     <dd>@item.CDBComCDI.DataDaAplicacao.ToString("dd/MM/yyyy")</dd>
                     <dt>Pre&ccedil;o Unit&aacute;rio:</dt>
-                    <dd>@item.CDBComCDI.PrecoUnitario.ToString("#.00")</dd>
+                    <dd>@item.CDBComCDI.PrecoUnitario.ToString("C")</dd>
                     <dt>Quantidade:</dt>
                     <dd>@item.CDBComCDI.Quantidade</dd>
                     <dt>Valor Aplicado:</dt>
-                    <dd>@item.ValorAplicado.ToString("#.00")</dd>
+                    <dd>@item.ValorAplicado.ToString("C")</dd>
                     <dt>Valor Bruto:</dt>
-                    <dd>@item.ValorBruto.ToString("0.00")</dd>
+                    <dd>@item.ValorBruto.ToString("C")</dd>
                     <dt>Valor IOF:</dt>
-                    <dd>@item.ValorIOF.ToString("0.00")</dd>
+                    <dd>@item.ValorIOF.ToString("C")</dd>
                     <dt>Valor IR:</dt>
-                    <dd>@item.ValorIR.ToString("0.00")</dd>
+                    <dd>@item.ValorIR.ToString("C")</dd>
                     <dt>Valor Liquido:</dt>
-                    <dd>@item.ValorLiquido.ToString("0.00")</dd>
+                    <dd>@item.ValorLiquido.ToString("C")</dd>
                 </dl>
                 <div class="text-center">
                     @*<a class="btn btn-default" asp-action="RegistrarResgate" asp-route-id="@item.CDBComCDI.Id">Registrar Resgate</a>
