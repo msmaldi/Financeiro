@@ -23,6 +23,8 @@ namespace Msmaldi.Financeiro.Website.BusinessLogic.CDB
         public PosicaoConsolidadaCDBComCDI<TCDBComCDI> ObterPosicaoConsolidada<TCDBComCDI>(
             TCDBComCDI cdbComCDI, DateTime naData) where TCDBComCDI : ICDBComCDI
         {
+            if (naData > cdbComCDI.DataDoVencimento)
+            naData = cdbComCDI.DataDoVencimento;
             return new PosicaoConsolidadaCDBComCDI<TCDBComCDI>(cdbComCDI, naData,
                 valorBruto: ValorBruto(cdbComCDI, naData),
                 valorIOF: ValorIOF(cdbComCDI, naData),
