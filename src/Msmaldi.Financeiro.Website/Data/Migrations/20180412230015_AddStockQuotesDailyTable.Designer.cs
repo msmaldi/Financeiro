@@ -11,9 +11,10 @@ using System;
 namespace Msmaldi.Financeiro.Website.Data.Migrations
 {
     [DbContext(typeof(FinanceiroDbContext))]
-    partial class FinanceiroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180412230015_AddStockQuotesDailyTable")]
+    partial class AddStockQuotesDailyTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
