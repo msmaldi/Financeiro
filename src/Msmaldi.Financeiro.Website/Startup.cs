@@ -68,8 +68,16 @@ namespace Msmaldi.Financeiro.Website
                 return new TaxasDIOverSeeder(context);
             });
 
+            services.AddSingleton<StockQuotesDailySeeder>((service) =>
+            {
+                var scope = service.CreateScope();
+                var context = scope.ServiceProvider.GetRequiredService<FinanceiroDbContext>();
+                return new StockQuotesDailySeeder(context);
+            });
+
             services.AddSingleton<IHostedService, FeriadosUpdaterService>();
             services.AddSingleton<IHostedService, DIOverUpdaterService>();
+            services.AddSingleton<IHostedService, StocksUpdaterService>();
 
             services.AddScoped((service) =>
             {                

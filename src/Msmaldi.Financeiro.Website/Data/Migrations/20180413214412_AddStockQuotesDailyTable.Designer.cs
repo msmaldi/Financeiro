@@ -11,7 +11,7 @@ using System;
 namespace Msmaldi.Financeiro.Website.Data.Migrations
 {
     [DbContext(typeof(FinanceiroDbContext))]
-    [Migration("20180412230015_AddStockQuotesDailyTable")]
+    [Migration("20180413214412_AddStockQuotesDailyTable")]
     partial class AddStockQuotesDailyTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -201,7 +201,7 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
 
                     b.HasKey("Symbol");
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.StockQuoteDaily", b =>
@@ -218,7 +218,7 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
 
                     b.HasKey("Symbol", "Date");
 
-                    b.ToTable("StockQuoteDaily");
+                    b.ToTable("StockQuotesDaily");
                 });
 
             modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.User", b =>

@@ -9,7 +9,7 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Stock",
+                name: "Stocks",
                 columns: table => new
                 {
                     Symbol = table.Column<string>(type: "varchar(16)", nullable: false),
@@ -17,11 +17,11 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stock", x => x.Symbol);
+                    table.PrimaryKey("PK_Stocks", x => x.Symbol);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StockQuoteDaily",
+                name: "StockQuotesDaily",
                 columns: table => new
                 {
                     Symbol = table.Column<string>(type: "varchar(16)", nullable: false),
@@ -31,11 +31,11 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StockQuoteDaily", x => new { x.Symbol, x.Date });
+                    table.PrimaryKey("PK_StockQuotesDaily", x => new { x.Symbol, x.Date });
                     table.ForeignKey(
-                        name: "FK_StockQuoteDaily_Stock_Symbol",
+                        name: "FK_StockQuotesDaily_Stocks_Symbol",
                         column: x => x.Symbol,
-                        principalTable: "Stock",
+                        principalTable: "Stocks",
                         principalColumn: "Symbol",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -44,10 +44,10 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StockQuoteDaily");
+                name: "StockQuotesDaily");
 
             migrationBuilder.DropTable(
-                name: "Stock");
+                name: "Stocks");
         }
     }
 }

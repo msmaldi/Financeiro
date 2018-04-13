@@ -200,7 +200,7 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
 
                     b.HasKey("Symbol");
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.StockQuoteDaily", b =>
@@ -217,7 +217,7 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
 
                     b.HasKey("Symbol", "Date");
 
-                    b.ToTable("StockQuoteDaily");
+                    b.ToTable("StockQuotesDaily");
                 });
 
             modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.User", b =>

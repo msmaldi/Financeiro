@@ -16,5 +16,9 @@ namespace Msmaldi.Financeiro.Website.Entities
             Open = open;
             Close = close;
         }
+
+        public StockQuoteDaily()
+        {            
+        }
     }
 }
