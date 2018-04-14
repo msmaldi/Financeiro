@@ -9,28 +9,28 @@ namespace Msmaldi.Financeiro.Website.Entities
         public int Quantidade { get; protected set; }
         public double ValorDeAquisicao { get; protected set; }
 
-        public Guid ApplicationUserId { get; set; }
-        public User ApplicationUser { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
 
         public Stock Stock { get; protected set; }
 
         public SwingTrade(string symbol, 
                              int quantidade, 
                           double valorDeAquisicao,
-                            User applicationUser)
-            : this(symbol, quantidade, valorDeAquisicao, applicationUser.Id)
+                            User user)
+            : this(symbol, quantidade, valorDeAquisicao, user.Id)
         {
         }
 
         public SwingTrade(string symbol,
                              int quantidade,
                           double valorDeAquisicao,
-                            Guid applicationUserId)
+                            Guid userId)
         {
             Symbol = symbol;
             Quantidade = quantidade;
             ValorDeAquisicao = valorDeAquisicao;
-            ApplicationUserId = applicationUserId;
+            UserId = userId;
         }
 
         protected SwingTrade()

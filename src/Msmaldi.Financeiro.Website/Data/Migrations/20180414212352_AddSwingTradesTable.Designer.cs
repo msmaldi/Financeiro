@@ -11,7 +11,7 @@ using System;
 namespace Msmaldi.Financeiro.Website.Data.Migrations
 {
     [DbContext(typeof(FinanceiroDbContext))]
-    [Migration("20180414211040_AddSwingTradesTable")]
+    [Migration("20180414212352_AddSwingTradesTable")]
     partial class AddSwingTradesTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -226,20 +226,20 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("ApplicationUserId");
-
                     b.Property<int>("Quantidade");
 
                     b.Property<string>("Symbol")
                         .HasColumnType("varchar(16)");
 
+                    b.Property<Guid>("UserId");
+
                     b.Property<double>("ValorDeAquisicao");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("Symbol");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("SwingTrades");
                 });
@@ -366,14 +366,14 @@ namespace Msmaldi.Financeiro.Website.Data.Migrations
 
             modelBuilder.Entity("Msmaldi.Financeiro.Website.Entities.SwingTrade", b =>
                 {
-                    b.HasOne("Msmaldi.Financeiro.Website.Entities.User", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Msmaldi.Financeiro.Website.Entities.Stock", "Stock")
                         .WithMany()
                         .HasForeignKey("Symbol");
+
+                    b.HasOne("Msmaldi.Financeiro.Website.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
