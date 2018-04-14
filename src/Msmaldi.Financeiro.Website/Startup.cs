@@ -46,7 +46,14 @@ namespace Msmaldi.Financeiro.Website
             services.AddDbContext<FinanceiroDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, GuIdentityRole>()
+            services.AddIdentity<User, GuIdentityRole>(options =>  
+                {
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireDigit = false;
+                })
                 .AddEntityFrameworkStores<FinanceiroDbContext>()
                 .AddDefaultTokenProviders()
                 .AddErrorDescriber<PortugueseIdentityErrorDescriber>();

@@ -33,7 +33,6 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
                 if (string.IsNullOrWhiteSpace(results[i]))
                     continue;
                 string[] rr = results[i].Split(',');
-                System.Console.WriteLine(results[i]);
                 var date = DateTime.ParseExact(rr[0], "yyyy-MM-dd", CultureInfo.InvariantCulture);
                 var open = double.Parse(rr[1], CultureInfo.InvariantCulture);
                 var high = double.Parse(rr[2], CultureInfo.InvariantCulture);
