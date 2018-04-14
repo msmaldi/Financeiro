@@ -20,6 +20,7 @@ using Msmaldi.Financeiro.Website.HostedServices;
 using Microsoft.Extensions.Hosting;
 using Msmaldi.Financeiro.Data.Seeder;
 using Msmaldi.Financeiro.Website.BusinessLogic.CDB;
+using Msmaldi.Financeiro.Website.BusinessLogic.SwingTrade;
 
 namespace Msmaldi.Financeiro.Website
 {
@@ -91,6 +92,12 @@ namespace Msmaldi.Financeiro.Website
                 var scope = service.CreateScope();
                 var db = scope.ServiceProvider.GetRequiredService<FinanceiroDbContext>();
                 return new PosicaoConsolidadaCDBComCDIFactory(db.TaxasDIOver.AsNoTracking());
+            });
+
+            services.AddScoped((service) =>
+            {
+                var db = service.GetService<FinanceiroDbContext>();
+                return new PosicaoConsolidadaSwingTradeFactory(db.StockQuotesDaily.AsNoTracking());
             });
 
             services.AddMvc();

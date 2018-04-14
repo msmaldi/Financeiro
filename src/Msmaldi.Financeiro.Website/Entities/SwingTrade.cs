@@ -1,8 +1,9 @@
 using System;
+using Msmaldi.Financeiro.Website.Interfaces;
 
 namespace Msmaldi.Financeiro.Website.Entities
 {
-    public class SwingTrade
+    public class SwingTrade : ISwingTrade
     {
         public long Id { get; protected set; }
         public string Symbol { get; protected set; }

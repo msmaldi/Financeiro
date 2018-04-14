@@ -1,0 +1,36 @@
+@model Msmaldi.Financeiro.Website.Entities.SwingTrade
+@{ ViewData["Title"] = "Delete"; }
+
+<div class="row">
+    <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
+        <h2>Excluir</h2>
+        <h3>Voc&ecirc; quer excluir isso?</h3>
+        <div>
+            <hr />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Swing Trade - @Model.Symbol
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>Ativo:</dt>
+                        <dd>@Model.Symbol</dd>
+                        <dt>Pre&ccedil;o Unit&aacute;rio:</dt>
+                        <dd>@Model.ValorDeAquisicao.ToString("C2")</dd>
+                        <dt>Quantidade:</dt>
+                        <dd>@Model.Quantidade</dd>
+                    </dl>
+                </div>
+            </div>
+            <form asp-action="Delete">
+                <div class="text-center">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Sim, eu quero excluir" class="btn btn-default" />
+                    </div> <hr />
+                    <a asp-action="Index">Voltar a Lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

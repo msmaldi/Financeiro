@@ -1,8 +1,9 @@
 using System;
+using Msmaldi.Financeiro.Website.Interfaces;
 
 namespace Msmaldi.Financeiro.Website.Entities
 {
-    public class StockQuoteDaily
+    public class StockQuoteDaily : IStockQuote
     {
         public string Symbol { get; protected set; }
         public DateTime Date { get; protected set; }
