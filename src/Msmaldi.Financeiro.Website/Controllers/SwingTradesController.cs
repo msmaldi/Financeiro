@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Msmaldi.Financeiro.Website.BusinessLogic.SwingTrade;
 using Msmaldi.Financeiro.Website.Data;
@@ -40,14 +41,16 @@ namespace Msmaldi.Financeiro.Website.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult>  Create()
         {
+            await GetStocksAsync();
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(SwingTradeViewModel m)
         {
+            await GetStocksAsync();
             if (ModelState.IsValid)
             {
                 var swingTrade = new SwingTrade(m.Symbol, m.Quantidade,
@@ -58,6 +61,12 @@ namespace Msmaldi.Financeiro.Website.Controllers
             }
 
             return View(m);
+        }
+
+        private async Task GetStocksAsync()
+        {
+            var stocks = await _db.Stocks.ToListAsync();
+            ViewBag.Stocks = new SelectList(stocks, "Symbol", "Symbol", null);
         }
 
         // GET: SwingTrades/Delete/5

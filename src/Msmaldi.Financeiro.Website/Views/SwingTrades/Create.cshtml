@@ -7,20 +7,24 @@
             <div class="form-horizontal">
                 <h4>Swing Trade</h4>
                 <hr />
+                    <a asp-controller="Stock" asp-action="Create">O código da ação não aparece na lista, clique aqui</a>
+                    
+                <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Symbol" class="col-sm-6 control-label"></label>
-                    @*<div class="col-sm-6">
+                    @*<div class="col-sm-6"> ViewBag.Stocks
                         <input autofocus type="text" asp-for="Symbol" class="form-control"/>
                     </div>*@
                     <div class="col-sm-6">
-                        <select class="form-control" name="Symbol" id="Symbol">
+                        @*<select class="form-control" name="Symbol" id="Symbol">
                             <option>BBPO11.SA</option>
                             <option>BBFI11B.SA</option>
                             <option>MFII11.SA</option>
                             <option>GGRC11.SA</option>
                             <option>PETR4.SA</option>
-                        </select>
+                        </select>*@
+                        <select asp-for="Symbol" class="form-control"  asp-items="@ViewBag.Stocks"></select>
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-2">
                         <span asp-validation-for="Symbol" class="text-danger"></span>
