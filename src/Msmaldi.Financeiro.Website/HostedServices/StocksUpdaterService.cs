@@ -25,7 +25,7 @@ namespace Msmaldi.Financeiro.Website.HostedServices
                 {
                     goto tryagain;
                 }
-                await Task.Delay(60*60*1000, stoppingToken);
+                await Task.Delay(60*1000, stoppingToken);
             }
         }
     }

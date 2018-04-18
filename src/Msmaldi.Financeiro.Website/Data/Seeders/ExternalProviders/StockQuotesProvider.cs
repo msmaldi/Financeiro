@@ -24,7 +24,7 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
                 _httpClient = new HttpClient(handler)
                 {
                     Timeout = TimeSpan.FromSeconds(15),
-                    BaseAddress = new Uri("https://www.alphavantage.co")
+                    BaseAddress = new Uri("https://www.alphavantage.co") //https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=VALE5.SA&interval=daily&datatype=csv&outputsize=compact&apikey=QERUFYVJKZMQB6J9
                 };
             }
         }
