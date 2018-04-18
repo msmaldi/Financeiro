@@ -66,7 +66,6 @@ namespace Msmaldi.Financeiro.Website.Controllers
 
         public new void Dispose()
         {
-            _provider.Dispose();
             base.Dispose();
         } 
     }
