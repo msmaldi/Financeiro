@@ -14,7 +14,12 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
         private readonly HttpClient _httpClient;
         public StockQuotesProvider()
         {
-            _httpClient = new HttpClient
+            HttpMessageHandler handler = new HttpClientHandler
+            {
+                SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls,
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+            _httpClient = new HttpClient(handler)
             {
                 BaseAddress = new Uri("https://www.alphavantage.co")
             };
