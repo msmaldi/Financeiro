@@ -83,9 +83,9 @@ namespace Msmaldi.Financeiro.Website
                 return new StockQuotesDailySeeder(context);
             });
 
+            services.AddSingleton<IHostedService, StocksUpdaterService>();
             services.AddSingleton<IHostedService, FeriadosUpdaterService>();
             services.AddSingleton<IHostedService, DIOverUpdaterService>();
-            services.AddSingleton<IHostedService, StocksUpdaterService>();
 
             services.AddScoped((service) =>
             {                
