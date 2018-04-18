@@ -15,13 +15,15 @@ namespace Msmaldi.Financeiro.Website.HostedServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+                tryagain:
                 System.Console.WriteLine("Atualizando Stocks");
                 try
                 {
                     await _seeder.AtualizarAsync(stoppingToken);
                 }
                 catch 
-                {      
+                {
+                    goto tryagain;
                 }
                 await Task.Delay(60*60*1000, stoppingToken);
             }

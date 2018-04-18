@@ -23,7 +23,7 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
         public async Task<List<StockQuoteDaily>> GetStockQuoteDailyAsync(string symbol,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            string result = await _httpClient.GetStringAsync($"/query?function=TIME_SERIES_DAILY&symbol={symbol}&interval=daily&datatype=csv&outputsize=full&apikey=QERUFYVJKZMQB6J9");
+            string result = await _httpClient.GetStringAsync($"/query?function=TIME_SERIES_DAILY&symbol={symbol}&interval=daily&datatype=csv&outputsize=compact&apikey=QERUFYVJKZMQB6J9");
             if (result.Contains("Invalid API call."))
                 throw new Exception("Invalid API call.");
             string[] results = result.Split(Environment.NewLine);
