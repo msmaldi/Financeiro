@@ -9,9 +9,9 @@ using Msmaldi.Financeiro.Website.Entities;
 
 namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
 {
-    public class StockQuotesProvider : IDisposable
+    public class StockQuotesProvider
     {
-        private readonly HttpClient _httpClient;
+        private static HttpClient _httpClient;
         public StockQuotesProvider()
         {
             HttpMessageHandler handler = new HttpClientHandler
@@ -19,10 +19,14 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
                 SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls,
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
             };
-            _httpClient = new HttpClient(handler)
+            if (_httpClient == null)
             {
-                BaseAddress = new Uri("https://www.alphavantage.co")
-            };
+                _httpClient = new HttpClient(handler)
+                {
+                    Timeout = TimeSpan.FromSeconds(15),
+                    BaseAddress = new Uri("https://www.alphavantage.co")
+                };
+            }
         }
 
         public async Task<List<StockQuoteDaily>> GetStockQuoteDailyAsync(string symbol,
@@ -49,11 +53,6 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
             }
             
             return resultToReturn;
-        }
-
-        public void Dispose()
-        {
-            _httpClient.Dispose();
         }
     }
 }
