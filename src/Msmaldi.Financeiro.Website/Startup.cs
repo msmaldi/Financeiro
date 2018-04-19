@@ -128,7 +128,7 @@ namespace Msmaldi.Financeiro.Website
             });
 
             app.UseStaticFiles();
-            app.UseAuthentication().UseSession();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
