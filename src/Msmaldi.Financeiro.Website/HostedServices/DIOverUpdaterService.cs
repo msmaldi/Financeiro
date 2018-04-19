@@ -8,11 +8,9 @@ namespace Msmaldi.Financeiro.Website.HostedServices
     public class DIOverUpdaterService : BackgroundService
     {
         private readonly TaxasDIOverSeeder _seeder;
-        private readonly StockQuotesDailySeeder _seederQuotes;
-        public DIOverUpdaterService(TaxasDIOverSeeder seeder, StockQuotesDailySeeder seederQuotes)
+        public DIOverUpdaterService(TaxasDIOverSeeder seeder)
         {
             _seeder = seeder;
-            _seederQuotes = seederQuotes;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -22,7 +20,6 @@ namespace Msmaldi.Financeiro.Website.HostedServices
                 System.Console.WriteLine("Atualizando TaxasDIOver");
                 try
                 {
-                    await _seeder.AtualizarAsync();
                     await _seeder.AtualizarAsync(stoppingToken);
                 }
                 catch 
