@@ -48,7 +48,6 @@ namespace Msmaldi.Financeiro.Website.Controllers
 
             try
             {
-
                 var stockQuoteDaily = await _provider.GetStockQuoteDailyAsync(m.Symbol);
                 _db.Stocks.Add(new Stock(m.Symbol));
                 await _db.SaveChangesAsync();
