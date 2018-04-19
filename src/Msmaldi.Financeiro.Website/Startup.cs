@@ -78,8 +78,9 @@ namespace Msmaldi.Financeiro.Website
 
             services.AddSingleton<StockQuotesDailySeeder>((service) =>
             {
-                var db = service.GetService<FinanceiroDbContext>();
-                return new StockQuotesDailySeeder(db);
+                var scope = service.CreateScope();
+                var context = scope.ServiceProvider.GetRequiredService<FinanceiroDbContext>();
+                return new StockQuotesDailySeeder(context);
             });
 
             services.AddSingleton<IHostedService, StocksUpdaterService>();
