@@ -22,20 +22,20 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders
 
         public async Task AtualizarAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            await AtualizarStockAsync(cancellationToken);
+            //await AtualizarStockAsync(cancellationToken);
 
             var stocksNoBanco = await _db.Stocks.ToListAsync(cancellationToken);
             foreach (var stock in stocksNoBanco)
             {
-                try
-                {
-                    Console.WriteLine($"Atualizando {stock.Symbol}");
+                //try
+                //{
+                //    Console.WriteLine($"Atualizando {stock.Symbol}");
                     await AtualizarStockQuoteDailyAsync(stock.Symbol);
-                }
-                catch
-                {
-                    Console.WriteLine($"Problemas ao atualizar {stock.Symbol}");
-                }
+                //}
+                //catch
+                //{
+                //    Console.WriteLine($"Problemas ao atualizar {stock.Symbol}");
+                //}
             }
         }
 
