@@ -33,3 +33,13 @@
         display: none;
     }
 }
+
+.color-red {
+    font-weight: bold;
+    color: red;
+}
+
+.color-green {
+    font-weight: bold;
+    color: green;
+}

@@ -31,6 +31,9 @@
                     <dd>@item.ValorIR.ToString("C")</dd>
                     <dt>Valor Liquido:</dt>
                     <dd>@item.ValorLiquido.ToString("C")</dd>
+                    <dt>Lucro:</dt>
+                    @{ var lucroOuPrejuizo = item.ValorLiquido - @item.ValorAplicado; }
+                    <dd class="color-green">@lucroOuPrejuizo.ToString("C")</dd>
                 </dl>
                 <div class="text-center">
                     @*<a class="btn btn-default" asp-action="RegistrarResgate" asp-route-id="@item.CDBComCDI.Id">Registrar Resgate</a>

@@ -16,13 +16,19 @@
                     <dt>Ativo:</dt>
                     <dd>@item.SwingTrade.Symbol</dd>
                     <dt>Pre&ccedil;o Unit&aacute;rio:</dt>
-                    <dd>@item.SwingTrade.ValorDeAquisicao.ToString("N2")</dd>
+                    <dd>@item.SwingTrade.ValorDeAquisicao.ToString("C")</dd>
                     <dt>Quantidade:</dt>
                     <dd>@item.SwingTrade.Quantidade</dd>
                     <dt>Valor Bruto:</dt>
-                    <dd>@item.ValorBruto.ToString("N2")</dd>
-                    <dt>Rendimento Bruto:</dt>
-                    <dd>@item.RendimentoBruto.ToString("N2")</dd>
+                    <dd>@item.ValorBruto.ToString("C")</dd>
+                    @{
+                        var color = item.RendimentoBruto > 0.0 ? "color-green" :
+                                    item.RendimentoBruto < 0.0 ? "color-red" : "";
+                        
+                        var lucroOuPrejuizo = item.RendimentoBruto > 0.0 ? "Lucro" : "Prejuízo";
+                    }
+                    <dt>@lucroOuPrejuizo :</dt>
+                    <dd class="@color">@item.RendimentoBruto.ToString("C")</dd>
                 </dl>
                 <div class="text-center">
                     <a class="btn btn-default" asp-action="Delete" asp-route-id="@item.SwingTrade.Id">Excluir</a>

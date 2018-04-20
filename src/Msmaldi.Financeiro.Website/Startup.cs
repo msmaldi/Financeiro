@@ -83,10 +83,12 @@ namespace Msmaldi.Financeiro.Website
                 return new StockQuotesDailySeeder(context);
             });
 
-            services.AddSingleton<IHostedService, StocksUpdaterService>();
-            services.AddSingleton<IHostedService, FeriadosUpdaterService>();
-            services.AddSingleton<IHostedService, DIOverUpdaterService>();
-
+            if (!Environment.IsDevelopment())
+            {
+                services.AddSingleton<IHostedService, StocksUpdaterService>();
+                services.AddSingleton<IHostedService, FeriadosUpdaterService>();
+                services.AddSingleton<IHostedService, DIOverUpdaterService>();
+            }
             services.AddScoped((service) =>
             {                
                 var scope = service.CreateScope();
