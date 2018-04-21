@@ -38,7 +38,7 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders
             else
                 entry = _db.CryptoCurrencyLastTickers.Add(ticker);
             await _db.SaveChangesAsync(cancellationToken);
-            entry.State = EntityState.Detached;                 
+            entry.State = EntityState.Detached;
         }
 
         public async Task AtualizarETHTickerAsync(CancellationToken cancellationToken = default(CancellationToken))
