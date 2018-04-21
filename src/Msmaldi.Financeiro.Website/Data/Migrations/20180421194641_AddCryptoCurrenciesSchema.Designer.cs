@@ -11,9 +11,10 @@ using System;
 namespace Msmaldi.Financeiro.Website.Data.Migrations
 {
     [DbContext(typeof(FinanceiroDbContext))]
-    partial class FinanceiroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180421194641_AddCryptoCurrenciesSchema")]
+    partial class AddCryptoCurrenciesSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

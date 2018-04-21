@@ -18,6 +18,9 @@ namespace Msmaldi.Financeiro.Website.Data
         public DbSet<Stock> Stocks { get; private set; }
         public DbSet<StockQuoteDaily> StockQuotesDaily { get; private set; }
         public DbSet<SwingTrade> SwingTrades { get; private set; }
+        public DbSet<CryptoCurrency> CryptoCurrencies { get; private set; }
+        public DbSet<CryptoWallet> CryptoWallets { get; private set; }
+        public DbSet<CryptoCurrencyLastTicker> CryptoCurrencyLastTickers { get; private set; }
 
         public FinanceiroDbContext(DbContextOptions<FinanceiroDbContext> options)
             : base(options)
@@ -35,6 +38,9 @@ namespace Msmaldi.Financeiro.Website.Data
             builder.ApplyConfiguration(new StockQuoteDailyEntityTypeConfiguration());
             builder.ApplyConfiguration(new StockEntityTypeConfiguration());
             builder.ApplyConfiguration(new SwingTradeEntityTypeConfiguration());
+            builder.ApplyConfiguration(new CryptoCurrencyEntityTypeConfiguration());
+            builder.ApplyConfiguration(new CryptoWalletEntityTypeConfiguration());
+            builder.ApplyConfiguration(new CryptoCurrencyLastTickerEntityTypeConfiguration());
 
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
