@@ -1,2 +1,2 @@
 BTC Bitcoin
-ETC Ethereum
+ETH Ethereum

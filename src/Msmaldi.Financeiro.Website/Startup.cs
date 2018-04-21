@@ -83,8 +83,16 @@ namespace Msmaldi.Financeiro.Website
                 return new StockQuotesDailySeeder(context);
             });
 
+            services.AddSingleton<CryptoCurrencySeeder>((service) =>
+            {
+                var scope = service.CreateScope();
+                var context = scope.ServiceProvider.GetRequiredService<FinanceiroDbContext>();
+                return new CryptoCurrencySeeder(context);
+            });
+
             if (!Environment.IsDevelopment())
             {
+                services.AddSingleton<IHostedService, CryptoCurrencyUpdaterService>();
                 services.AddSingleton<IHostedService, StocksUpdaterService>();
                 services.AddSingleton<IHostedService, FeriadosUpdaterService>();
                 services.AddSingleton<IHostedService, DIOverUpdaterService>();

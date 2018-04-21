@@ -27,15 +27,7 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders
             var stocksNoBanco = await _db.Stocks.ToListAsync(cancellationToken);
             foreach (var stock in stocksNoBanco)
             {
-                //try
-                //{
-                //    Console.WriteLine($"Atualizando {stock.Symbol}");
-                    await AtualizarStockQuoteDailyAsync(stock.Symbol);
-                //}
-                //catch
-                //{
-                //    Console.WriteLine($"Problemas ao atualizar {stock.Symbol}");
-                //}
+                await AtualizarStockQuoteDailyAsync(stock.Symbol);
             }
         }
 
