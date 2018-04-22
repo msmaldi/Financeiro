@@ -1,0 +1,122 @@
+@model Msmaldi.Financeiro.Website.Models.ResumoViewModels.Ativos
+@{ ViewData["Title"] = "Resumo"; }
+<h2>Seus Ativos</h2>
+<hr />
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Resumo</strong>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-6">
+                    <dl class="dl-horizontal">
+                        <dt>Valor Bruto:</dt>
+                        <dd>@Model.ValorBruto().ToString("C")</dd>
+                        <dt>Quantidade de SalariosMinimos:</dt>
+                        <dd>@Model.QuantidadeDeSalariosMinimos.ToString("N2")</dd>
+                        <dt>Salario Minimo:</dt>
+                        <dd>@Model.SalarioMinimo.ToString("C")</dd>
+                    </dl>
+                </div>
+                <div class="col-sm-6">
+                    <dl class="dl-horizontal">
+                        <dt>Total CDB com CDI:</dt>
+                        <dd>@Model.TotalCDIeSELIC.ToString("C") (@Model.TotalCDIeSELICPorcent.ToString("P2"))</dd>
+                        <dt>Total Renda Variavel:</dt>
+                        <dd>@Model.TotalRendaVariavel.ToString("C") (@Model.TotalRendaVariavelPorcent.ToString("P2"))</dd>
+                        <dt>Total Criptomoedas:</dt>
+                        <dd>@Model.TotalCryptoCurrency.ToString("C") (@Model.TotalCryptoCurrencyPorcent.ToString("P2"))</dd>
+                    </dl>
+                </div>
+                @*<div class="col-sm-4">
+                    <dl class="dl-horizontal">
+                        <dt>Objetivo CDI e Selic:</dt>
+                        <dd>@Model.ObjetivoCDIeSELIC.ToString("N2") (@Model.ObjetivoCDIeSELICPorcent.ToString("P2"))</dd>
+                        <dt>Objetivo Renda Variavel:</dt>
+                        <dd>@Model.ObjetivoRendaVariavel.ToString("N2") (@Model.ObjetivoRendaVariavelPorcent.ToString("P2"))</dd>
+                        <dt>Objetivo IPCA+:</dt>
+                        <dd>@Model.ObjetivoComIPCA.ToString("N2") (@Model.ObjetivoComIPCAPorcent.ToString("P2"))</dd>
+                        <dt>Objetivo DigitalCoin:</dt>
+                        <dd>@Model.ObjetivoDigitalCoin.ToString("N2") (@Model.ObjetivoDigitalCoinPorcent.ToString("P2"))</dd>
+                    </dl>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+@foreach (var item in Model.PosicoesConsolidadasCDBComCDI)
+{
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                CDB com CDI @item.CDBComCDI.Taxa.ToString("P2")
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Valor Aplicado:</dt>
+                    <dd>@item.ValorAplicado.ToString("C")</dd>
+                    <dt>Valor Liquido:</dt>
+                    <dd>@item.ValorLiquido.ToString("C")</dd>
+                    <dt>Lucro:</dt>
+                    @{ var lucroOuPrejuizo = item.ValorLiquido - @item.ValorAplicado; }
+                    <dd class="color-green">@lucroOuPrejuizo.ToString("C")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+}
+@foreach (var item in Model.PosicoesConsolidadasSwingTrade)
+{
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Swing Trade - @item.SwingTrade.Symbol
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Valor Aplicado:</dt>
+                    <dd>@item.ValorDeAquisicao.ToString("C")</dd>
+                    <dt>Valor Bruto:</dt>
+                    <dd>@item.ValorBruto.ToString("C")</dd>
+                    @{
+                        var color = item.RendimentoBruto > 0.0 ? "color-green" :
+                                    item.RendimentoBruto < 0.0 ? "color-red" : "";
+                        
+                        var lucroOuPrejuizo = item.RendimentoBruto > 0.0 ? "Lucro" : "Prejuízo";
+                    }
+                    <dt>@lucroOuPrejuizo :</dt>
+                    <dd class="@color">@item.RendimentoBruto.ToString("C")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+}
+@foreach (var item in Model.PosicoesConsolidadasCryptoWallet)
+{
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Carteira - @item.CryptoWallet.Label - @item.CryptoWallet.CriptoCurrencyId
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Valor de Aplicado:</dt>
+                    <dd>@item.CryptoWallet.ValorDeAquisicao.ToString("C")</dd>
+                    <dt>Valor Bruto:</dt>
+                    <dd>@item.ValorBruto.ToString("C")</dd>
+                    @{
+                        var color = item.RendimentoBruto > 0.0 ? "color-green" :
+                                    item.RendimentoBruto < 0.0 ? "color-red" : "";
+                        
+                        var lucroOuPrejuizo = item.RendimentoBruto > 0.0 ? "Lucro" : "Prejuízo";
+                    }
+                    <dt>@lucroOuPrejuizo :</dt>
+                    <dd class="@color">@item.RendimentoBruto.ToString("C")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+}
+</div>

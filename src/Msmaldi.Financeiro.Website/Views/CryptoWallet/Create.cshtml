@@ -7,10 +7,13 @@
             <div class="form-horizontal">
                 <h4>Carteira de Criptomoeda</h4>
                 <hr />
+                    <p>Neste formulario, escolha a criptomoeda, insira um rotulo para a carteira.</p>
+                    <p>Informe a quantidade de criptomoedas adiquiridas e o valor que usou utilizado para adiquirir essa quantia.</p>
+                <hr />
                 <div class="form-group">
                     <label asp-for="CriptoCurrencyId" class="col-sm-6 control-label"></label>
                     <div class="col-sm-6">
-                        <select asp-for="CriptoCurrencyId" class="form-control"  asp-items="@ViewBag.CryptoCurrencies"></select>
+                        <select autofocus asp-for="CriptoCurrencyId" class="form-control"  asp-items="@ViewBag.CryptoCurrencies"></select>
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-2">
                         <span asp-validation-for="CriptoCurrencyId" class="text-danger"></span>
@@ -19,7 +22,7 @@
                 <div class="form-group">
                     <label asp-for="Label" class="col-sm-6 control-label"></label>
                     <div class="col-sm-6">
-                        <input autofocus type="text" asp-for="Label" class="form-control" />
+                        <input type="text" asp-for="Label" class="form-control" />
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-2">
                         <span asp-validation-for="Label" class="text-danger"></span>
@@ -28,7 +31,7 @@
                 <div class="form-group">
                     <label asp-for="Quantidade" class="col-sm-6 control-label"></label>
                     <div class="col-sm-6">
-                        <input autofocus type="text" asp-for="Quantidade" class="form-control" />
+                        <input type="text" asp-for="Quantidade" class="form-control" />
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-2">
                         <span asp-validation-for="Quantidade" class="text-danger"></span>

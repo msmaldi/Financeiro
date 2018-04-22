@@ -13,7 +13,7 @@ namespace Msmaldi.Financeiro.Website.BusinessLogic.CryptoCurrencies
         internal PosicaoConsolidadaCryptoCurrency(TCryptoWallet cryptoWallet, double valorBruto)
         {
             CryptoWallet = cryptoWallet;
-            ValorDeAquisicao = cryptoWallet.ValorDeAquisicao * cryptoWallet.Quantidade;
+            ValorDeAquisicao = cryptoWallet.ValorDeAquisicao; // * cryptoWallet.Quantidade;
             ValorBruto = valorBruto;
             RendimentoBruto = ValorBruto - ValorDeAquisicao;
         }

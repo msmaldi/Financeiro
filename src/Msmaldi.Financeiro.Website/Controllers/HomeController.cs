@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Msmaldi.Financeiro.Website.Models;
 using Msmaldi.Financeiro.Website.Entities;
+using Msmaldi.Financeiro.Website.Data;
+using Msmaldi.Financeiro.Website.BusinessLogic.CDB;
+using Msmaldi.Financeiro.Website.BusinessLogic.SwingTrade;
+using Msmaldi.Financeiro.Website.BusinessLogic.CryptoCurrencies;
 
 namespace Msmaldi.Financeiro.Website.Controllers
 {

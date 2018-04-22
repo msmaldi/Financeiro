@@ -7,7 +7,8 @@
             <div class="form-horizontal">
                 <h4>Swing Trade</h4>
                 <hr />
-                    <a asp-controller="Stock" asp-action="Create">O código da ação não aparece na lista, clique aqui</a>                    
+                    <p>Neste formulario, escolha a ação.</p>
+                    <p>A quantidade de ações adiquiridas e o <b>preço medio das ações</b>.</p>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
@@ -16,7 +17,7 @@
                         <select asp-for="Symbol" class="form-control"  asp-items="@ViewBag.Stocks"></select>
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-2">
-                        <span asp-validation-for="Symbol" class="text-danger"></span>
+                        <a asp-controller="Stock" asp-action="Create">O código da ação não aparece na lista, clique aqui</a>
                     </div>
                 </div>
                 <div class="form-group">

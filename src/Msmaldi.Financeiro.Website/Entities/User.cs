@@ -10,5 +10,8 @@ namespace Msmaldi.Financeiro.Website.Entities
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class User : GuIdentityUser
     {
+        public List<CDBComCDI> CDBsComCDI { get; protected set; }
+        public List<SwingTrade> SwingTrades { get; protected set; }
+        public List<CryptoWallet> CryptoWallets { get; protected set; }
     }
 }

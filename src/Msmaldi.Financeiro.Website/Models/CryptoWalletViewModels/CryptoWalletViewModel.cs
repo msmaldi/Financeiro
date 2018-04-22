@@ -9,12 +9,12 @@ namespace Msmaldi.Financeiro.Website.Models.CryptoWalletViewModels
         public string Label { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [Display(Name = "Quantidade")]
+        [Display(Name = "Quantidade Adquirida")]
         [Range(0.00000001, 999999999.0)]
         public double Quantidade { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [Display(Name = "Valor de Aquisição")]
+        [Display(Name = "Valor Aplicado")]
         [Range(0.01, 999999999.0)]
         public double ValorDeAquisicao { get; set; }
 
