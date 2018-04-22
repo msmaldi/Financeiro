@@ -71,6 +71,33 @@ namespace Msmaldi.Financeiro.Website.Controllers
         }
 
 
+        public async Task<IActionResult> Delete(long? id)
+        {
+            CryptoWallet cryptoWallet;
+            if (id == null ||
+                (cryptoWallet = await GetCryptoWalletAsync(id.Value)) == null)
+                return NotFound();
+
+            return View(cryptoWallet);
+        }
+
+
+        [HttpPost, ActionName(nameof(Delete))]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(long id)
+        {
+            var cryptoWallet = await GetCryptoWalletAsync(id);
+            _db.CryptoWallets.Remove(cryptoWallet);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<CryptoWallet> GetCryptoWalletAsync(long id)
+        {
+            var userId = (await GetCurrentUserAsync()).Id;
+            return await _db.CryptoWallets.Where(m => m.UserId == userId && m.Id == id).SingleOrDefaultAsync();
+        }
 
         private Task<User> GetCurrentUserAsync()
             => _userManager.GetUserAsync(HttpContext.User);
