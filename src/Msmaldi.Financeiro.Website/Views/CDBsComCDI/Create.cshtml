@@ -31,7 +31,10 @@
                 <div class="form-group">
                     <label asp-for="PrecoUnitario" class="col-sm-6 control-label"></label>
                     <div class="col-sm-6">
-                        <input asp-for="PrecoUnitario" class="form-control" />
+                        <div class="input-group">
+                            <span class="input-group-addon">R$</span>
+                            <input asp-for="PrecoUnitario" class="form-control" />
+                        </div>
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-2">
                         <span asp-validation-for="PrecoUnitario" class="text-danger"></span>
@@ -49,7 +52,10 @@
                 <div class="form-group">
                     <label asp-for="Taxa" class="col-sm-6 control-label"></label>
                     <div class="col-sm-6">
-                        <input asp-for="Taxa" class="form-control" />
+                        <div class="input-group">
+                            <input asp-for="Taxa" class="form-control" />
+                            <span class="input-group-addon">% CDI</span>
+                        </div>
                     </div>                    
                     <div class="col-xs-offset-1 col-sm-offset-2">
                         <span asp-validation-for="Taxa" class="text-danger"></span>

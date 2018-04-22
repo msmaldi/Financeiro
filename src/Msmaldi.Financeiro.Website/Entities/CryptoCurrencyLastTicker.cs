@@ -1,8 +1,9 @@
 using System;
+using Msmaldi.Financeiro.Website.Interfaces;
 
 namespace Msmaldi.Financeiro.Website.Entities
 {
-    public class CryptoCurrencyLastTicker
+    public class CryptoCurrencyLastTicker : ICryptoCurrencyLastTicker
     {
         public string CriptoCurrencyId { get; protected set; }
         public CryptoCurrency CriptoCurrency { get; protected set; }

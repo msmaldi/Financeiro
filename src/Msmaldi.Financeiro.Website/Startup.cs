@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Msmaldi.Financeiro.Data.Seeder;
 using Msmaldi.Financeiro.Website.BusinessLogic.CDB;
 using Msmaldi.Financeiro.Website.BusinessLogic.SwingTrade;
+using Msmaldi.Financeiro.Website.BusinessLogic.CryptoCurrencies;
 
 namespace Msmaldi.Financeiro.Website
 {
@@ -109,7 +110,13 @@ namespace Msmaldi.Financeiro.Website
                 var db = service.GetService<FinanceiroDbContext>();
                 return new PosicaoConsolidadaSwingTradeFactory(db.StockQuotesDaily.AsNoTracking());
             });
-
+            
+            services.AddScoped((service) =>
+            {
+                var db = service.GetService<FinanceiroDbContext>();
+                return new PosicaoConsolidadaCryptoCurrencyFactory(db.CryptoCurrencyLastTickers.AsNoTracking());
+            });
+            
             services.AddMvc();
         }
 
