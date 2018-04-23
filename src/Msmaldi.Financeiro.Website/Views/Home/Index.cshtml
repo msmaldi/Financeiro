@@ -1,3 +1,65 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Home Page"; }
+<h2>Organize seus investimentos em um só lugar</h2>
+<hr />
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                CDBs Com CDI
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <p>Certificado de Depósito Bancário CDB (Certificado de Depósito Bancário) tudo calculado na hora.</p>
+                </dl>
+                <div class="text-center">
+                    <a class="btn btn-default" asp-controller="CDBsComCDI" asp-action="Index">CDBs com CDI</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Swing Trade
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <p>Swing Trade é o um metodo destinado para a compra e venda de ações, FII's e opções listados na B3.</p>
+                </dl>
+                <div class="text-center">
+                    <a class="btn btn-default" asp-controller="SwingTrades" asp-action="Index">Swing Trade</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Criptomoedas
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <p>Saiba a cotação atual da suas criptomoedas de maneira rapida, com apenas um clique.</p>
+                </dl>
+                <div class="text-center">
+                    <a class="btn btn-default" asp-controller="CryptoWallet" asp-action="Index">Criptomoedas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Calculo de Lucro ou Prejuízo
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <p>Além de saber o seu patrimonio total, saiba resultado financeiro de suas posições.</p>
+                </dl>
+                <div class="text-center">
+                    <a class="btn btn-default" asp-controller="Resumo" asp-action="Index">Resumo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
