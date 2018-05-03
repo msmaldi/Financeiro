@@ -46,14 +46,29 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders
 
         public async Task AtualizarStockQuoteDailyAsync(string symbol, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var stocksQuotesNoBanco = await _db.StockQuotesDaily.ToListAsync(cancellationToken);
+            var stocksQuotesNoBanco = await _db.StockQuotesDaily.Where(s => s.Symbol == symbol).ToListAsync(cancellationToken);
 
             var stocksQuotes = await _provider.GetStockQuoteDailyAsync(symbol);
             
             var stocksQuotesParaAtualizar = stocksQuotes.Except(stocksQuotesNoBanco, StockQuoteDailyComparer.Instance);
             
-            await _db.StockQuotesDaily.AddRangeAsync(stocksQuotesParaAtualizar, cancellationToken);
-            await _db.SaveChangesAsync(cancellationToken);
+            if (stocksQuotesParaAtualizar.Count() > 0)
+            {
+                await _db.StockQuotesDaily.AddRangeAsync(stocksQuotesParaAtualizar, cancellationToken);
+                await _db.SaveChangesAsync(cancellationToken);
+            }
+            else
+            {
+                var lastNoBanco = stocksQuotesNoBanco.Last();                
+                var first = stocksQuotes.First();
+
+                if (lastNoBanco.Date == first.Date)
+                {
+                    lastNoBanco.Close = first.Close;
+                    lastNoBanco.Open = first.Open;
+                    await _db.SaveChangesAsync(cancellationToken);
+                }
+            }
         }
 
         private static Stock ObterStock(string symbol)

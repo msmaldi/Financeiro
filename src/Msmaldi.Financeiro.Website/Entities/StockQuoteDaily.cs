@@ -7,8 +7,8 @@ namespace Msmaldi.Financeiro.Website.Entities
     {
         public string Symbol { get; protected set; }
         public DateTime Date { get; protected set; }
-        public double Open { get; protected set; }
-        public double Close { get; protected set; }
+        public double Open { get; set; }
+        public double Close { get; set; }
 
         public StockQuoteDaily(string symbol, DateTime date, double open, double close)
         {
