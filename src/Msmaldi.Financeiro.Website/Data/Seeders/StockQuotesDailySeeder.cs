@@ -27,7 +27,16 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders
             var stocksNoBanco = await _db.Stocks.ToListAsync(cancellationToken);
             foreach (var stock in stocksNoBanco)
             {
-                await AtualizarStockQuoteDailyAsync(stock.Symbol);
+                try
+                {
+                    await AtualizarStockQuoteDailyAsync(stock.Symbol);
+                    System.Threading.Thread.Sleep(1000 * 15);
+                }
+                catch (Exception e)
+                { 
+                    Console.WriteLine($"Erro para atualizar {stock.Symbol}");
+                    Console.WriteLine(e.Message);
+                }
             }
         }
 
@@ -46,12 +55,14 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders
 
         public async Task AtualizarStockQuoteDailyAsync(string symbol, CancellationToken cancellationToken = default(CancellationToken))
         {
+            Console.WriteLine($"\t\t{symbol}");
             var stocksQuotesNoBanco = await _db.StockQuotesDaily.Where(s => s.Symbol == symbol).ToListAsync(cancellationToken);
 
             var stocksQuotes = await _provider.GetStockQuoteDailyAsync(symbol);
             
-            var stocksQuotesParaAtualizar = stocksQuotes.Except(stocksQuotesNoBanco, StockQuoteDailyComparer.Instance);
             
+            var stocksQuotesParaAtualizar = stocksQuotes.Except(stocksQuotesNoBanco, StockQuoteDailyComparer.Instance);
+            System.Console.WriteLine(stocksQuotesParaAtualizar.Count());
             if (stocksQuotesParaAtualizar.Count() > 0)
             {
                 await _db.StockQuotesDaily.AddRangeAsync(stocksQuotesParaAtualizar, cancellationToken);
