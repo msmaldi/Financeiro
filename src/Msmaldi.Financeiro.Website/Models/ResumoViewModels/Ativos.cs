@@ -55,7 +55,7 @@ namespace Msmaldi.Financeiro.Website.Models.ResumoViewModels
             return TotalCDIeSELIC + TotalRendaVariavel + TotalCryptoCurrency;
         }
 
-        public double SalarioMinimo => 954.0;
+        public double SalarioMinimo => 998.0;
 
         public double QuantidadeDeSalariosMinimos => ValorBruto() / SalarioMinimo;
     }
