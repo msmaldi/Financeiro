@@ -26,16 +26,16 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
 
         public Task<CryptoCurrencyLastTicker> GetBTCTickerAsync(
             CancellationToken cancellationToken = default(CancellationToken))
-            => GetTickerAsync("BTC", cancellationToken);
+            => GetTickerAsync("BRLBTC", cancellationToken);
 
         public Task<CryptoCurrencyLastTicker> GetETHTickerAsync(
             CancellationToken cancellationToken = default(CancellationToken))
-            => GetTickerAsync("ETH", cancellationToken);
+            => GetTickerAsync("BRLETH", cancellationToken);
 
         public async Task<CryptoCurrencyLastTicker> GetTickerAsync(string cryptoCurrency,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var source = $"/v1/public/{cryptoCurrency}/ticker";
+            var source = $"/v2/public/{cryptoCurrency}/ticker";
             var httpResponse = await _httpClient.GetAsync(source, cancellationToken);
             if (httpResponse.StatusCode == HttpStatusCode.OK)
             {
