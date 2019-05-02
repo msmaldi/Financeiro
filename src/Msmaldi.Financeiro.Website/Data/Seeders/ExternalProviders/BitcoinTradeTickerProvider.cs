@@ -35,7 +35,7 @@ namespace Msmaldi.Financeiro.Website.Data.Seeders.ExternalProviders
         public async Task<CryptoCurrencyLastTicker> GetTickerAsync(string cryptoCurrency,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var source = $"/v2/public/{"BRL" + cryptoCurrency}/ticker";
+            var source = $"/v2/public/BRL{cryptoCurrency}/ticker";
             var httpResponse = await _httpClient.GetAsync(source, cancellationToken);
             if (httpResponse.StatusCode == HttpStatusCode.OK)
             {
